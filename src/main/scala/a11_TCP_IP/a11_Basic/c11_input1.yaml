@@ -1,0 +1,15 @@
+- meta:
+  type  : simple
+  # Available values are
+  # forNtime, forNminutes, forNseconds
+  loop  : for1time
+    
+- line  :
+  data  : This is the first line
+  delay : 1s
+  
+- line  :
+  data  : This is the second line
+  delay : 1s  
+  
+  
