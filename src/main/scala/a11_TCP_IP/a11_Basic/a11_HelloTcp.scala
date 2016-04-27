@@ -5,15 +5,18 @@ import org.apache.spark.SparkContext
 import org.apache.spark.streaming.Seconds
 import org.apache.spark.streaming.StreamingContext
 
-object a11_Basic {
+/*
+	spark-submit 
+ */
+object a11_HelloTcp {
   def main(args: Array[String]) {
     
     val conf = new SparkConf().setAppName("Basic_TCP_IP")
     val sc = new SparkContext(conf)
     
     //  Streaming context with Batch interval of 
-    //  1 seconds
-    val stc = new StreamingContext(sc, Seconds(1))
+    //   Seconds(...)
+    val stc = new StreamingContext(sc, Seconds(3))
     
     //  Create an Input stream that receives data from
     //  TCP/IP Socket

@@ -16,3 +16,9 @@ project/plugins/project/
 .scala_dependencies
 .worksheet
 /bin/
+
+# Python specific
+
+__pycache__
+
+.cache-main
