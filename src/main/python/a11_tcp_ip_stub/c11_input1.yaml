@@ -1,16 +1,15 @@
 - meta:
-  type         : simple
- 
+  type            : simple
+  addtodata       : 
+    - secondscounter
+  
   # 'None' is used to provide delay without sending data to the
   # 'nc' server
-- data  : None
-  delay : 1s
-  
 - data  : First line
   delay : 0.5s  
   
 - data  : None
-  delay : 9.5s
+  delay : 1.5s
   
 - data  : Second line
   delay : 0.6s

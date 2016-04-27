@@ -47,7 +47,6 @@ def Setup_logger():
     logging.config.dictConfig(config)
     
     log = logging.getLogger(__name__)
-    log.info("#### Application Begins ####")
 
 def Main():    
     
