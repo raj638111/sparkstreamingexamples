@@ -1,3 +1,4 @@
+# a11 > a22_Formatter.py
 from datetime import datetime, timedelta
 import logging.config
 import time
@@ -56,12 +57,13 @@ class Formatter(threading.Thread):
     ==============================================================='''
     def Print_counter(self):
         minNsec = self.curDtime.strftime("[%M][%S]")
-        if self.counter == 0:
+        '''if self.counter == 0:
             self.log.info("%s%s", "[min][sec]" + " " * 1, \
                                             "[seconds-counter]")
-            self.log.info("")
-        self.log.info("%s : [%s]", minNsec, \
-                      (" " * 3 + str(self.counter))[-3:])
+            self.log.info("")'''
+        '''self.log.info("%s : [%s]", minNsec, \
+                      (" " * 3 + str(self.counter))[-3:])'''
+        self.log.info("[%s]", (" " * 3 + str(self.counter))[-3:])
 
 
     '''===============================================================
@@ -69,8 +71,11 @@ class Formatter(threading.Thread):
     ==============================================================='''            
     def Print_data(self, data):
         self.log.debug("self.diffInSec -> %s", self.diffInSec)
-        self.log.info("%s => %s", \
+        '''self.log.info("%s => %s", \
                     (" " * 16 + "[." + self.decimalSeconds + "]"),\
+                                                     data)'''
+        self.log.info("%s => %s", \
+                    (" " * 5 + "[." + self.decimalSeconds + "]"),\
                                                      data)
         
     '''===============================================================
@@ -94,7 +99,8 @@ class Formatter(threading.Thread):
             self.log.debug("Meta -> %s", meta)
             if(meta == "minsec") :
                 minsec = self.curDtime.\
-                        strftime("Min -> [%M], Sec -> [%S]")
+                        strftime("[%M][%S.")
+                minsec = minsec + str(self.decimalSeconds) + "]"
                 dataNmeta.append("minsec=" + minsec)        
             if(meta == "secondscounter"):
                 dataNmeta.append("secondscounter=" + \
@@ -120,23 +126,25 @@ class Formatter(threading.Thread):
     Place_data_in_queue()
     ==============================================================='''                
     def Place_data_in_queue(self):
-        
-        for element in self.dataLst:
-            delay = element['delay']
-            data = element['data']
-            self.log.debug("element -> %s", element)
-            self.log.debug("data -> %s", data)
-            self.log.debug("delay -> %s", delay)
-            
-            if delay.endswith('s'):
-                delayTime = delay[:-1]
-                self.log.debug("Delaying by : %s", delayTime)
-                time.sleep(float(delayTime))
-            else:
-                sys.exit(1)
-            
-            if data != 'None':
-                self.fifoQ.put(data)
+        while True :
+            for element in self.dataLst:
+                delay = element['delay']
+                data = element['data']
+                #self.log.debug("element -> %s", element)
+                #self.log.debug("data -> %s", data)
+                #self.log.debug("delay -> %s", delay)
+                
+                if delay.endswith('s'):
+                    delayTime = delay[:-1]
+                    #self.log.debug("Delaying by : %s", delayTime)
+                    time.sleep(float(delayTime))
+                else:
+                    sys.exit(1)
+                
+                if data != 'None':
+                    self.fifoQ.put(data)
+            if self.metaDny['mode'] == "singlepassmode":
+                break            
     '''===============================================================
     run()
     ==============================================================='''                
@@ -145,16 +153,18 @@ class Formatter(threading.Thread):
         self.firstDtime = datetime.now()
         self.Print_counter()
         while True:
-            time.sleep(0.5)
+            time.sleep(0.1)
             self.curDtime = datetime.now()
             self.diffInSec = (self.curDtime - self.firstDtime).\
                                             total_seconds()
-            rounded = round(self.diffInSec, 1)
-            self.decimalSeconds = str(rounded).split(".")[1]
-            self.log.debug("rounded -> %s", rounded)
+            self.log.debug("diffInSec -> %s", self.diffInSec)
+            #rounded = round(self.diffInSec, 1)
+            #self.log.debug("rounded -> %s", rounded)
+            #self.decimalSeconds = str(rounded).split(".")[1]
+            self.decimalSeconds = str(self.diffInSec).\
+                                        split(".")[1][:1]
             self.log.debug("decimalSeconds -> %s", \
                            self.decimalSeconds)
-                                            
             self.log.debug("self.diffInSec -> %s", self.diffInSec)
             floored = floor(self.diffInSec)
             self.log.debug("floored -> %s", floored)

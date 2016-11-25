@@ -5,16 +5,13 @@ Reference :
     https://docs.python.org/3/library/queue.html
     http://stackoverflow.com/questions/11829982/piping-data-from-python-to-an-external-command
 =================================================================='''
-
-from __future__ import print_function
-
+# a11 > a21_stub.py
 import sys
 import threading
 import time
 import yaml
 import logging.config
 from a22_Formatter import Formatter
-from a25_MinFormatter import MinFormatter
 
 def Get_arguments():
     log = logging.getLogger(__name__)

@@ -1,4 +1,15 @@
 
 -  How to stop a spark streaming Application that is 
    continuously running
+-  A blog on 
+   -  Partial function &
+   -  Partially applied function
+      http://booksites.artima.com/programming_in_scala_2ed/examples/html/ch08.html
+      
+      val c = sum
+        <console>:5: error: missing arguments for method sum...
+        follow this method with `_' if you want to treat it as a 
+        partially applied function
+               val c = sum
+                 ^   
    

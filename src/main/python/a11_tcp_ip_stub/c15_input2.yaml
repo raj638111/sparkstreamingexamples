@@ -1,29 +1,13 @@
-#a11 > c11
+# a11 > c15_input2.yaml
 - meta:
   type            : simple
   # Can be minsec (or) secondscounter
   addtodata       : 
-    - minsec
     - secondscounter
   # Can be singpassmode (or) loopmode  
   mode            : loopmode    
   
   # 'None' is used to provide delay without sending data to the
   # 'nc' server
-- data  : First line
-  delay : 0.5s  
-  
-- data  : None
-  delay : 1.5s
-  
-- data  : Second line
-  delay : 0.6s
-  
-- data  : Third line
-  delay : 0.7s  
-  
-- data  : Fourth Line
-  delay : 1.75s  
-  
-- data  : Fifth Line
-  delay : 2.5s  
+- data  : lion
+  delay : 0.9s  

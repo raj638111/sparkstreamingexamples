@@ -12,13 +12,16 @@ lazy val root = (project in file(".")).
     	//             worker nodes, as they will be already available
     	//             in the worked nodes
     	"org.apache.spark" % "spark-core_2.10" % "1.6.1" % "provided",
-        "org.apache.spark" % "spark-streaming-kafka_2.10" % "1.5.1",
-        "org.apache.spark" % "spark-streaming_2.10" % "1.5.1",
+        "org.apache.spark" % "spark-streaming-kafka_2.10" % "1.6.1",
+        "org.apache.spark" % "spark-streaming_2.10" % "1.6.1",
         "com.yammer.metrics" % "metrics-annotation" % "2.2.0",
         "org.apache.hbase" % "hbase-common" % "1.1.2",
         "org.apache.hadoop" % "hadoop-common" % "2.7.1",
         "org.apache.hbase" % "hbase-server" % "1.1.2",
-        "org.apache.hbase" % "hbase-client" % "1.1.2"    	
+        "org.apache.hbase" % "hbase-client" % "1.1.2",
+        "io.confluent" % "kafka-avro-serializer" % "3.0.0",
+        "org.scalactic" %% "scalactic" % "3.0.0",
+        "org.scalatest" %% "scalatest" % "3.0.0"    	
     )
  )
 
